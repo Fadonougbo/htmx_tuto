@@ -1,0 +1,82 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif,sans-serif;
+}
+
+header {
+    margin: 1rem 0;
+}
+
+header h1 {
+    font-size: 5rem;
+    width: 100%;
+    text-align: center;
+}
+
+#button_container {
+    display: flex;
+    justify-content: center;
+}
+
+ #button_container button {
+    padding: 1rem;
+    font-size: 1.5rem;
+    border:none;
+    text-transform: capitalize;
+    background-color: rgb(6, 224, 119);
+    color: #fff;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+main #cards {
+
+    padding: 1.4rem;
+    display: grid;
+    grid-template: auto/repeat(auto-fit,minmax(25rem,1fr));
+    gap: 1.5rem;
+}
+
+#cards .card {
+    text-align: justify;
+
+    h2 {
+        font-size: 2.2rem;
+        text-transform: capitalize;
+    }
+
+    
+
+    p {
+        margin: 1rem 0;
+        font-size: 1.3rem;
+    }
+}
+
+form {
+    padding: 1rem;
+}
+
+form :is(input,textarea) {
+    width: 23rem;
+    padding: 0.5rem;
+    resize: none;
+}
+
+form .input_container {
+    margin: 1rem 0;
+
+}
+
+.htmx-indicator{
+    display:none;
+}
+.htmx-request .htmx-indicator{
+    display:inline;
+}
+.htmx-request.htmx-indicator{
+    display:inline;
+}
+

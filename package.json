@@ -1,0 +1,20 @@
+{
+    "name": "ts_tuto_bundler",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+      "dev": "vite",
+      "build": "tsc && vite build",
+      "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+      "preview": "vite preview"
+    },
+    "dependencies": {
+      "htmx.org": "^1.9.6"
+    },
+    "devDependencies": {
+      "typescript": "^5.1.6",
+      "vite": "^4.4.8"
+    }
+  }
+  
