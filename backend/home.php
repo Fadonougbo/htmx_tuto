@@ -4,9 +4,7 @@ use App\DB;
 
 $pdo=DB::connection();
 
-$req=$pdo->prepare('SELECT * FROM users LIMIT 20');
-
-$req->execute();
+$req=$pdo->query('SELECT * FROM users LIMIT 20');
 
 $articles=$req->fetchAll();
 
@@ -17,8 +15,18 @@ $articles=$req->fetchAll();
     <header>
         <h1>Mes articles</h1>
     </header>
-    <div id='button_container' hx-target='this' >
-        <button hx-get='/form' >Ajouter un article <strong>&plus;</strong></button>
+    <div id='container' class=''>
+        <button 
+            hx-get='/form' 
+            hx-swap='outerHTML' 
+            hx-indicator="#loader" 
+            id="show_form_button" 
+            hx-headers='{"HShow": "true"}'  
+            hx-disabled-elt="this" 
+        >
+                Ajouter un article <strong>&plus;</strong>
+        </button>
+        <button id='loader' class="htmx-indicator" >loading...</button>
     </div>
     <div id='cards' >
         <?php foreach($articles as $article): ?>
@@ -28,6 +36,5 @@ $articles=$req->fetchAll();
                 <p><?=  $article->description ?></p>
             </section>
         <?php endforeach;?>
-    </div>
-    
+    </div>    
 </main>

@@ -1,80 +1,34 @@
 import htmx from 'htmx.org'
 
-/* document.body.addEventListener("htmx:xhr:loadstart",(e)=> {
-  console.log(lo);
-}) */
+/* 
+  mon idee serait de detecter la page sur laquel on n'est grace au header HShow que j'ai definie et ensuite ajuster 
+  la hauteur du container en function
 
-/* const essai2=document.querySelector("#essai")?.addEventListener('htmx:xhr:loadstart',(e)=> {
-  console.log(e.detail.loaded,'start');
-})
+  trouve un moyen de detecter le header en js sinon utilise $_server pour trouver le header et ensuite tu le passe par les attribut
+*/
 
+const container:HTMLDivElement|null=document?.querySelector('#container')
 
-const essai=document.querySelector("#span")?.addEventListener('htmx:xhr:progress',(e)=> {
-  console.log(e.detail.loaded,'progres');
-})
-
-const essai3=document.querySelector("#span")?.addEventListener('htmx:xhr:loadend',(e)=> {
-  console.log(e.detail.loaded,'end');
-}) */
-
-/* const essai3=document.querySelector("mark")?.addEventListener('htmx:load',(e)=> {
-  
-  console.log(e,'load');
-}) */
-
-/* document.querySelector('#form')?.addEventListener('htmx:xhr:progress',(evt)=> {
-  console.log(evt.detail.total * 100)
-})
- */
-
-/* const evtSource = new EventSource("http://localhost:8000/form");
-
-evtSource.addEventListener("message", function (event) {
-  const newElement = document.createElement("li");
-  const time = JSON.parse(event.data).time;
-  newElement.textContent = "ping at " + time;
-  console.log(newElement);
-});
-
-evtSource.addEventListener("error", function (event) {
-  console.log('err',event);
-  evtSource.close();
-});
-
-console.log(evtSource); */
+const basicContainerHeight=container?.getBoundingClientRect().height;
 
 
+const beforSwap=()=> {
+  const container:HTMLDivElement|null=document?.querySelector('#container');
 
-
-
-/* function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  if(container) {
+   
+  }
 }
 
-sleep(3000)
-console.log('okok');
+htmx.on('htmx:beforeSwap',beforSwap)
+
+const func=(e:Event)=> {
+
+  if(container) {
 
 
-function block() {
-  return new Promise((res,rej)=> {
-      setTimeout(()=> {
-        res('ok')
-      },4000)
-  })
-} */
-/* block()
-console.log('okok'); */
-
-
-/* htmx.on('#form', 'htmx:afterRequest', function(evt) {
-  console.log(evt)
+  }
   
-});
- */
+}
 
-
-
-
-
-/* htmx.on("body", "htmx:xhr:loadstart", function(evt){ console.log(evt.detail.loaded); });
- */
+htmx.on('htmx:afterSwap',func)

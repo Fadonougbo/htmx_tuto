@@ -1,0 +1,28 @@
+.htmx-indicator{
+    display:none;
+}
+.htmx-request .htmx-indicator{
+    display:inline;
+}
+.htmx-request.htmx-indicator{
+    display:inline;
+}
+
+
+/* button.htmx-swapping {
+    background-color: yellow;
+    border:solid 2px green;
+} */
+form.htmx-added {
+    border:solid 1px green;
+}
+/* form.htmx-added{
+    height: 0;
+    border:solid 2px blue;
+    overflow-y: hidden;
+}
+
+form {
+    height: 30rem;
+    transition: height 1s;
+} */
