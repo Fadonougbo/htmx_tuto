@@ -7,7 +7,24 @@ import htmx from 'htmx.org'
   trouve un moyen de detecter le header en js sinon utilise $_server pour trouver le header et ensuite tu le passe par les attribut
 */
 
-const container:HTMLDivElement|null=document?.querySelector('#container')
+
+/* htmx.on('htmx:afterProcessNode',(e)=> {
+
+
+console.log(e)
+
+}) */
+
+/* htmx.on('htmx:xhr:loadstart',(e)=> {
+  console.log(e)
+})
+
+htmx.on('htmx:xhr:progress',(e)=> {
+  console.log(e)
+})
+ */
+
+/* const container:HTMLDivElement|null=document?.querySelector('#container')
 
 const basicContainerHeight=container?.getBoundingClientRect().height;
 
@@ -31,4 +48,4 @@ const func=(e:Event)=> {
   
 }
 
-htmx.on('htmx:afterSwap',func)
+htmx.on('htmx:afterSwap',func) */

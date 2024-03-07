@@ -1,87 +1,54 @@
-main #cards {
 
-    padding: 1.4rem;
-    display: grid;
-    grid-template: auto/repeat(auto-fit,minmax(25rem,1fr));
-    gap: 1.5rem;
-}
 
-#cards .card {
-    text-align: justify;
+table {
 
-    h2 {
-        font-size: 2.2rem;
+    width: 100%;
+    border-collapse: collapse;
+
+    th {
         text-transform: capitalize;
+        font-size: 1.5rem;
     }
 
-    
+    th,td {
+        text-align: center;
+    }
 
-    p {
-        margin: 1rem 0;
-        font-size: 1.3rem;
+    td{
+        padding: 1rem;
     }
 }
 
-#container {
+#form_container {
+
+    width: 100%;
+    margin: 1.5rem 0;
     display: flex;
     justify-content: center;
-    transition: height 2s;
-    border:solid 2px green
-}
-
-#container.show {
-    height: 0;
-    overflow-y: hidden;
-}
-
-#container.noshow {
-    height: 23rem;
-    overflow-y: hidden;
-}
-
- #container button {
-    padding: 1rem;
-    font-size: 1.5rem;
-    border:none;
-    text-transform: capitalize;
-    background-color: rgb(6, 224, 119);
-    color: #fff;
-    cursor: pointer;
-    border-radius: 3px;
-}
 
 
-#container #show_form_button:disabled{
-    display: none;
-}
-
-
-#form #exit_button {
-    background-color: tomato;
-}
-
-form #action_button_container {
-    display: flex;
-    width:100%;
-    margin: 1rem 0;
-    
-    button {
-        flex-grow: 1;
-        margin: 0 1rem;
+    form {
+        display: flex;
+        flex-wrap: wrap;
     }
-}
 
-form {
-    padding: 1rem;
-}
+    input,button {
+        padding: 1rem;
+        flex: 1 1 auto;
+        margin: 1rem;
+    }
 
-form :is(input,textarea) {
-    width: 23rem;
-    padding: 0.5rem;
-    resize: none;
-}
+    form button {
+        font-size: 1.3rem;
+        text-transform: capitalize;
+        background-color: rgb(21, 185, 108);
+        color: #fff;
+        border:none;
+        cursor: pointer;
+    }
 
-form .input_container {
-    margin: 1rem 0;
+    form label {
+        font-size: 1.3rem;
+    }
 
 }

@@ -33,7 +33,6 @@ vendor
 helper.*
 index.html
 tailwind.*
-vite.*
 tsconfig.*
 postcss.*
 .eslintrc.*
