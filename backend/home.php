@@ -33,22 +33,19 @@ try{
 }
 
 ?>
-
-<!--  hx-get='/form?x=2' hx-headers='{"myHeader": "article DESC"}'  -->
 <main>
 
     <div id='form_container' >
         <form action="" method="GET">
-            <section >
+            
+            <section hx-indicator="#loader" hx-swap='outerHTML' hx-select='table' hx-include="input" hx-include="input" hx-target='table'>
+
                 <input type="search" 
                        name="article"  
                        placeholder="Article name" 
                        hx-get='/form'
                        hx-trigger='keyup,change throttle:500ms' 
-                       hx-target='table' 
-                       hx-include="input"
-                       hx-select='table'
-                       hx-swap='outerHTML'
+                       
                 >
 
                 <input type="search" 
@@ -56,10 +53,6 @@ try{
                        placeholder="Categorie name" 
                        hx-get='/form'  
                        hx-trigger='keyup,change throttle:500ms' 
-                       hx-target='table'
-                       hx-include="input"
-                       hx-select='table'
-                       hx-swap='outerHTML'
                 >
 
 
@@ -68,10 +61,6 @@ try{
                        placeholder="Min quantity" 
                        hx-get='/form'  
                        hx-trigger='keyup,change delay:100ms' 
-                       hx-target='table'
-                       hx-include="input"
-                       hx-select='table'
-                       hx-swap='outerHTML'
                        min="1"
                 >
 
@@ -79,11 +68,7 @@ try{
                        name="max_qte" 
                        placeholder="Max quantity" 
                        hx-get='/form'  
-                       hx-trigger='keyup,change delay:100ms' 
-                       hx-target='table'
-                       hx-include="input"
-                       hx-select='table'
-                       hx-swap='outerHTML'
+                       hx-trigger='keyup,change delay:100ms'
                        min="1"
                 >
 
@@ -93,48 +78,28 @@ try{
                                  name="status" 
                                  value="1" 
                                  hx-get='/form'  
-                                 hx-trigger='change delay:100ms' 
-                                 hx-target='table'
-                                 hx-include="input"
-                                 hx-select='table'
-                                 hx-swap='outerHTML'
+                                 hx-trigger='change delay:100ms'
+                                 
                 >
                 </label>
             </section>
             
         </form>
     </div>
-   
+ 
     <table>
         <thead>
-            <tr>
-                <th
-                       hx-get='/form?orderyBy=article.DESC'
-                       hx-target='table' 
-                       hx-include="input"
-                       hx-select='table'
-                       hx-swap='outerHTML'
-                >
+            <tr hx-target='table' hx-include="input" hx-select='table' hx-swap='outerHTML'>
+
+                <th hx-get='/form?orderyBy=article.DESC' >
                     article
                 </th>
 
-                <th
-                       hx-get='/form?orderyBy=categorie.DESC'
-                       hx-target='table' 
-                       hx-include="input"
-                       hx-select='table'
-                       hx-swap='outerHTML'
-                >
+                <th hx-get='/form?orderyBy=categorie.DESC' >
                     categorie
                 </th>
 
-                <th
-                       hx-get='/form?orderyBy=quantite.DESC'
-                       hx-target='table' 
-                       hx-include="input"
-                       hx-select='table'
-                       hx-swap='outerHTML'
-                > 
+                <th hx-get='/form?orderyBy=quantite.DESC' > 
                     quantité
                 </th>
 
@@ -155,5 +120,7 @@ try{
        </tbody>
     </table>
     
-
+        <section id='loader' class="htmx-indicator" >
+            loading...
+        </section>
 </main>

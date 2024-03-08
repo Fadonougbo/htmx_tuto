@@ -1,8 +1,13 @@
 
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
 table {
 
-    width: 100%;
+    width: 85%;
     border-collapse: collapse;
 
     th {
@@ -15,8 +20,13 @@ table {
         text-align: center;
     }
 
-    td{
+    td,th{
         padding: 1rem;
+    }
+
+    #no_match_row {
+        font-size: 2rem;
+        text-align: center;
     }
 }
 

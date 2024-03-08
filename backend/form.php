@@ -1,6 +1,5 @@
 <?php 
 
-
 use App\DB;
 
 $pdo=DB::connection();
@@ -66,6 +65,7 @@ if(!empty($_GET)) {
   }
 
   $s='';
+  $n='';
 
   if( isset($_GET['orderyBy']) && !empty($_GET['orderyBy'])) {
 
@@ -77,6 +77,7 @@ if(!empty($_GET)) {
     $sqlStatment.=" order By {$field} {$state} ";
 
     $s=$state==='DESC'?'ASC':'DESC';
+    $n=$field;
 
   }
 
@@ -101,55 +102,57 @@ if(!empty($_GET)) {
   
   <table>
         <thead>
-            <tr>
-                <th
 
-                       hx-get="/form?orderyBy=article.<?= $s?>"
-                       hx-target='table' 
-                       hx-include="input"
-                       hx-select='table'
-                       hx-swap='outerHTML'
-                >
-                  article
+            <tr hx-target='table' hx-include="input" hx-select='table' hx-swap='outerHTML'>
+
+                <th hx-get="/form?orderyBy=article.<?= $s?>">
+                  article 
+                  <?php if(!empty($s)&&($n==='article')):  ?>
+                    <?= $s==='DESC'?'&blacktriangledown;':'&blacktriangle;' ?> 
+                  <?php endif; ?>
+
                 </th>
-                <th
-                       hx-get="/form?orderyBy=categorie.<?= $s?>"
-                       hx-target='table' 
-                       hx-include="input"
-                       hx-select='table'
-                       hx-swap='outerHTML'
-                >
+                <th hx-get="/form?orderyBy=categorie.<?= $s?>" >
                   categorie
+                  <?php if(!empty($s)&&($n==='categorie')):  ?>
+                    <?= $s==='DESC'?'&blacktriangledown;':'&blacktriangle;' ?> 
+                  <?php endif; ?>
                 </th>
-                <th
-                       hx-get="/form?orderyBy=quantite.<?= $s?>"
-                       hx-target='table' 
-                       hx-include="input"
-                       hx-select='table'
-                       hx-swap='outerHTML'
-                >
+                <th hx-get="/form?orderyBy=quantite.<?= $s?>" >
                   quantité
+                  <?php if(!empty($s)&&($n==='quantite')):  ?>
+                    <?= $s==='DESC'?'&blacktriangledown;':'&blacktriangle;' ?> 
+                  <?php endif; ?>
                 </th>
-                <th
-                >
+                <th>
                   status
                 </th>
+
             </tr>
+
         </thead>
+
        <tbody>
-            <tr>
-              <td><?=$sqlStatment;dump($data);dump($_GET,$s) ?></td>
-            </tr>
-       <?php foreach($articles as $article): ?>
-            <tr>
-              <td><?=$sqlStatment; ?></td>
-                <td><?=$article->article; ?></td>
-                <td><?=$article->categorie ?></td>
-                <td><?= $article->quantite ?></td>
-                <td><?= (int)$article->status===1?'online':'offline' ?></td>
-            </tr>
-        <?php endforeach;?>
+            <?php if(!empty($articles)): ?>
+
+              <?php foreach($articles as $article): ?>
+                  <tr>
+                      <td><?=$article->article; ?></td>
+                      <td><?=$article->categorie ?></td>
+                      <td><?= $article->quantite ?></td>
+                      <td><?= (int)$article->status===1?'online':'offline' ?></td>
+                  </tr>
+              <?php endforeach;?>
+
+            <?php else: ?>
+
+                <tr id='no_match_row' >
+                  <td colspan="4" >No Match</td>
+                </tr>
+
+            <?php endif; ?>
        </tbody>
-    </table>
+
+  </table>
 
 
