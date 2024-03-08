@@ -100,7 +100,7 @@ try{
                 </th>
 
                 <th hx-get='/form?orderyBy=quantite.DESC' > 
-                    quantité
+                    quantity
                 </th>
 
                 <th>

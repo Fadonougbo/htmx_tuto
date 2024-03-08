@@ -119,7 +119,7 @@ if(!empty($_GET)) {
                   <?php endif; ?>
                 </th>
                 <th hx-get="/form?orderyBy=quantite.<?= $s?>" >
-                  quantité
+                  quantity
                   <?php if(!empty($s)&&($n==='quantite')):  ?>
                     <?= $s==='DESC'?'&blacktriangledown;':'&blacktriangle;' ?> 
                   <?php endif; ?>
