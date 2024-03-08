@@ -4,21 +4,37 @@ use App\DB;
 
 $pdo=DB::connection();
 
-/* 
+$faker = Faker\Factory::create();
+
+
+
 try{
 
-    $req=$pdo->query('SELECT * FROM users LIMIT 20');
-
+    $req=$pdo->query('SELECT * FROM dataTable');
     $articles=$req->fetchAll();
+
+    /* for($i=1;$i<120;$i++) {
+
+        $res=$pdo->prepare(" INSERT INTO dataTable  (article,categorie,quantite,status)  VALUES (:article,:categorie,:quantite,:status) ");
+
+        $res->execute([
+            'article'=>implode(' ',$faker->words(2)),
+            'categorie'=>$faker->word(),
+            'quantite'=>$faker->numberBetween(1,300),
+            'status'=>$faker->numberBetween(0,1)
+        ]);
+        
+    } */
+
 
 }catch(PDOException $e) {
 
     echo $e->getMessage();
-} */
+}
 
 ?>
 
-
+<!--  hx-get='/form?x=2' hx-headers='{"myHeader": "article DESC"}'  -->
 <main>
 
     <div id='form_container' >
@@ -27,10 +43,12 @@ try{
                 <input type="search" 
                        name="article"  
                        placeholder="Article name" 
-                       hx-get='/form'  
+                       hx-get='/form'
                        hx-trigger='keyup,change throttle:500ms' 
-                       hx-target='#debug' 
+                       hx-target='table' 
                        hx-include="input"
+                       hx-select='table'
+                       hx-swap='outerHTML'
                 >
 
                 <input type="search" 
@@ -38,8 +56,10 @@ try{
                        placeholder="Categorie name" 
                        hx-get='/form'  
                        hx-trigger='keyup,change throttle:500ms' 
-                       hx-target='#debug'
+                       hx-target='table'
                        hx-include="input"
+                       hx-select='table'
+                       hx-swap='outerHTML'
                 >
 
 
@@ -48,8 +68,11 @@ try{
                        placeholder="Min quantity" 
                        hx-get='/form'  
                        hx-trigger='keyup,change delay:100ms' 
-                       hx-target='#debug'
+                       hx-target='table'
                        hx-include="input"
+                       hx-select='table'
+                       hx-swap='outerHTML'
+                       min="1"
                 >
 
                 <input type="number" 
@@ -57,8 +80,11 @@ try{
                        placeholder="Max quantity" 
                        hx-get='/form'  
                        hx-trigger='keyup,change delay:100ms' 
-                       hx-target='#debug'
+                       hx-target='table'
                        hx-include="input"
+                       hx-select='table'
+                       hx-swap='outerHTML'
+                       min="1"
                 >
 
                 <label for="checkbox" >
@@ -68,72 +94,66 @@ try{
                                  value="1" 
                                  hx-get='/form'  
                                  hx-trigger='change delay:100ms' 
-                                 hx-target='#debug'
+                                 hx-target='table'
                                  hx-include="input"
+                                 hx-select='table'
+                                 hx-swap='outerHTML'
                 >
                 </label>
             </section>
             
         </form>
     </div>
-    <div id='debug' ></div>
+   
     <table>
         <thead>
             <tr>
-                <th>article</th>
-                <th>categorie</th>
-                <th>quantité</th>
-                <th>status</th>
+                <th
+                       hx-get='/form?orderyBy=article.DESC'
+                       hx-target='table' 
+                       hx-include="input"
+                       hx-select='table'
+                       hx-swap='outerHTML'
+                >
+                    article
+                </th>
+
+                <th
+                       hx-get='/form?orderyBy=categorie.DESC'
+                       hx-target='table' 
+                       hx-include="input"
+                       hx-select='table'
+                       hx-swap='outerHTML'
+                >
+                    categorie
+                </th>
+
+                <th
+                       hx-get='/form?orderyBy=quantite.DESC'
+                       hx-target='table' 
+                       hx-include="input"
+                       hx-select='table'
+                       hx-swap='outerHTML'
+                > 
+                    quantité
+                </th>
+
+                <th>
+                    status
+                </th>
             </tr>
         </thead>
        <tbody>
-        <tr>
-            <td>doe</td>
-            <td>sport</td>
-            <td>6</td>
-            <td>online</td>
-        </tr>
-        <tr>
-            <td>doe</td>
-            <td>sport</td>
-            <td>6</td>
-            <td>online</td>
-        </tr>
-        <tr>
-            <td>doe</td>
-            <td>sport</td>
-            <td>6</td>
-            <td>online</td>
-        </tr>
+       <?php foreach($articles as $article): ?>
+            <tr>
+                <td><?=$article->article ?></td>
+                <td><?=$article->categorie ?></td>
+                <td><?= $article->quantite ?></td>
+                <td><?= (int)$article->status===1?'online':'offline' ?></td>
+            </tr>
+        <?php endforeach;?>
        </tbody>
     </table>
     
-    <!-- <header>
-        <h1>Mes articles</h1>
-    </header>
-    <div id='container'>
-        <button 
-            hx-get='/form' 
-            hx-trigger='click'
-            hx-swap='outerHTML' 
-            hx-indicator="#loader" 
-            id="show_form_button" 
-            hx-headers='{"HShow": "true"}'  
-            hx-disabled-elt="this"
 
-        >
-                Ajouter un article <strong>&plus;</strong>
-        </button>
-        <button id='loader' class="htmx-indicator" >loading...</button>
-    </div>
-    
-    <div id='cards' >
-        <?php foreach($articles as $article): ?>
-            <section class="card" >
-                <div></div>
-                <h2><span></span> <?=  $article->name ?></h2>
-                <p><?=  $article->description ?></p>
-            </section>
-        <?php endforeach;?>
-    </div>     -->
 </main>
